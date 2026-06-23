@@ -69,6 +69,19 @@ def test_method_route_no_methods(app):
         app.get("/", methods=["GET", "POST"])
 
 
+def test_query_method_route(app, client):
+    @app.query("/")
+    def query():
+        return flask.request.get_data(as_text=True)
+
+    rv = client.open("/", method="QUERY", data="select=*")
+    assert rv.status_code == 200
+    assert rv.data == b"select=*"
+    # The QUERY method is advertised like any other registered method.
+    rv = client.open("/", method="OPTIONS")
+    assert "QUERY" in rv.allow
+
+
 def test_provide_automatic_options_attr_disable(
     app: flask.Flask, client: FlaskClient
 ) -> None:
