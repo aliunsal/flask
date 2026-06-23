@@ -30,7 +30,7 @@ Unreleased
     of only lower case file extensions. :pr:`6012`
 -   Add ``query`` method route shortcut for the ``QUERY`` HTTP method
     (:rfc:`10008`). ``MethodView`` dispatches ``QUERY`` requests to a ``query``
-    handler. :issue:`XXXX`
+    handler. :issue:`6065`
 
 
 Version 3.1.3
